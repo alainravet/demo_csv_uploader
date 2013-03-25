@@ -22,6 +22,7 @@ group :assets do
   gem 'less-rails'
   gem 'twitter-bootstrap-rails'
 end
+gem 'haml-rails',     github: 'indirect/haml-rails'
 
 gem 'jquery-rails'
 
