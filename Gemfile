@@ -23,6 +23,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 gem 'haml-rails',     github: 'indirect/haml-rails'
+gem 'simple_form'
 
 gem 'jquery-rails'
 
