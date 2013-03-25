@@ -42,7 +42,7 @@
           / /.nav-collapse
     .container-fluid
       .row-fluid
-        .span3
+        -#.span3
           .well.sidebar-nav
             %ul.nav.nav-list
               %li.nav-header Sidebar
@@ -51,7 +51,7 @@
               %li= link_to "Link3", "/path3"
           / /.well
         / /span
-        .span9
+        .span12
           = bootstrap_flash
           = yield
       / /row
