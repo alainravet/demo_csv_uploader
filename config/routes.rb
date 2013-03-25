@@ -7,7 +7,12 @@ SimpleBanking::Application.routes.draw do
 
   root :to => 'home#index'
 
-  resources :users
+  resources :users do
+    collection do
+      post 'reset_sample_data'
+    end
+  end
+
 
 
   # The priority is based upon order of creation:

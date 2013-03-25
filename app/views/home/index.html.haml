@@ -1,1 +1,8 @@
 %h1 Home#index
+
+.alert.alert-info
+  %i.icon-cogs
+  =link_to reset_sample_data_users_path, class: 'btn btn-danger', method: :post do
+    %i.icon-refresh
+    Reload DB with 2 default users : 'admin/admin' and 'test/test'
+
