@@ -26,6 +26,9 @@ gem 'haml-rails',     github: 'indirect/haml-rails'
 
 gem 'jquery-rails'
 
+group :test do
+  gem 'minitest-reporters'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
