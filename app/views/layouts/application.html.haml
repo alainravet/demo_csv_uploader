@@ -35,6 +35,14 @@
             %span.icon-bar
           %a.brand{:href => root_path} SimpleBanking
           .container-fluid.nav-collapse
+            %p.navbar-text.pull-right
+              - if current_user
+                Logged in as
+                = current_user.name
+                = link_to "Logout", log_out_path
+              - else
+                = link_to "Login", log_in_path
+
             %ul.nav
               %li
                 = link_to users_path, class: '' do
@@ -55,8 +63,6 @@
           / /.well
         / /span
         .span12
-          = debug current_user
-
           = bootstrap_flash
           = yield
       / /row

@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name, :login
   validates_uniqueness_of :login
+
+  def admin?
+    login == 'admin'
+  end
 end
