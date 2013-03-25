@@ -26,13 +26,7 @@ gem 'simple_form'
 
 gem 'jquery-rails'
 
-group :production do
-  gem 'pg'
-end
-
-group :test, :development do
-  gem 'sqlite3'
-end
+gem 'pg'
 
 group :test do
   gem 'minitest-reporters'
