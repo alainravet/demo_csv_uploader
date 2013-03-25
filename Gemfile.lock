@@ -80,6 +80,7 @@ GEM
       minitest (>= 2.12, < 5.0)
       powerbar
     multi_json (1.7.2)
+    pg (0.14.1)
     polyglot (0.3.3)
     powerbar (1.0.11)
       ansi (~> 1.4.0)
@@ -150,6 +151,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   minitest-reporters
+  pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   simple_form
