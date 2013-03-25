@@ -33,10 +33,13 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => "#"} SimpleBanking
+          %a.brand{:href => root_path} SimpleBanking
           .container-fluid.nav-collapse
             %ul.nav
-              %li= link_to "Manage Users", users_path
+              %li
+                = link_to users_path, class: '' do
+                  %i.icon-user
+                  Manager Users
               %li= link_to "Link2", "/path2"
               %li= link_to "Link3", "/path3"
           / /.nav-collapse
