@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325234520) do
+ActiveRecord::Schema.define(:version => 20130326003915) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(:version => 20130325234520) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  create_table "transfers", :force => true do |t|
+    t.integer  "origin_id"
+    t.integer  "destination_id"
+    t.string   "amount_in_cents"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "transfers", ["destination_id"], :name => "index_transfers_on_destination_id"
+  add_index "transfers", ["origin_id"], :name => "index_transfers_on_origin_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

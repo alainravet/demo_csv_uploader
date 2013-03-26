@@ -11,6 +11,9 @@ SimpleBanking::Application.routes.draw do
     collection do
       post 'reset_sample_data'
     end
+    member do
+      post 'transfer'
+    end
   end
 
 

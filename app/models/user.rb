@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
   def admin?
     login == 'admin'
   end
+
+  def transfer_money_to(dest_user, amount)
+    Transfer.perform(self.account, dest_user.account, amount)
+  end
 end
