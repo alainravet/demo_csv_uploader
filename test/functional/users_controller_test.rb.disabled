@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  def a_user
+    @user = User.create! name: 'Test User',     login: 'test',  password: 'test',  password_confirmation: 'test'
+  end
   setup do
-    @user = users(:one)
+    @user = a_user
   end
 
   test "should get index" do
