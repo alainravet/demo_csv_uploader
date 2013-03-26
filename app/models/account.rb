@@ -17,4 +17,7 @@ class Account < ActiveRecord::Base
     self.balance_in_cents= (value * 100).to_i
   end
 
+  def label_method
+    "Account #1 of : #{user.login}"
+  end
 end

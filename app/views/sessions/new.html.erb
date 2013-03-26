@@ -1,13 +1,26 @@
 <h1>Log in</h1>
 
-<%= form_tag sessions_path do %>
-  <div class="field">
-    <%= label_tag :login%>
-    <%= text_field_tag :login, params[:login] %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
+<%= form_tag sessions_path, html: { class: 'form-horizontal' }, class: 'form-horizontal' do %>
+
+    <div class="control-group">
+      <label class="control-label" for="login">login</label>
+      <div class="controls">
+        <%= text_field_tag :login, params[:login] %>
+        <span class="help-inline">available logins : <b><%=  User.all.collect(&:login).join('</b>, <b>').html_safe    %></b></span>
+      </div>
+      <br>
+
+    </div>
+
+
+    <div class="control-group">
+      <label class="control-label" for="password">password</label>
+      <div class="controls">
+        <%= password_field_tag :password, params[:password] %>
+      </div>
+      <br>
+    </div>
   <div class="actions"><%= submit_tag "Log in" %></div>
 <% end %>
+
+

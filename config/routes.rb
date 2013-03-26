@@ -1,5 +1,9 @@
 SimpleBanking::Application.routes.draw do
 
+  get "transfers/new"
+
+  get "transfers/create"
+
   get 'log_out' => 'sessions#destroy',  :as => 'log_out'
   get 'log_in'  => 'sessions#new',      :as => 'log_in'
   get 'sign_up' => 'users#new',         :as => 'sign_up'
@@ -11,10 +15,9 @@ SimpleBanking::Application.routes.draw do
     collection do
       post 'reset_sample_data'
     end
-    member do
-      post 'transfer'
-    end
+    resources :transfers
   end
+  resources :transfers
 
 
 

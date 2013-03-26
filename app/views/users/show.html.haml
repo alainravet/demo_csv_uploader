@@ -1,8 +1,8 @@
 - model_class = User
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human
+  %h1 Profile and Transfers
 
-%div.span12
+.span12
   .row
     .span4.well
       %table.table
@@ -19,11 +19,51 @@
         %tr
           %td
             %strong= model_class.human_attribute_name(:balance) + ':'
-          %td= @user.balance
+          %td
+            = number_to_currency @user.balance
+            = link_to new_user_transfer_path(@user), :class => 'btn btn-primary pull-right' do
+              %i.icon-money
+              Transfer money
+
       .form-actions
-        = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(@user), :class => 'btn btn-primary'
+        = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(@user), :class => 'btn'
     .span8
 
-%div.span12
 
--#- simple_form_for @transfer
+.span12.transfers_history
+  .well.span12
+    %h2 Transfers History
+
+    .span12
+      %div.span5
+        %h3 Debit
+        %table.table.table-striped.table-bordered.table-hover.table-condensed
+          %tr
+            %th{width: '40%'} to
+            %th{width: '20%'} amount
+            %th{width: '40%'} to
+          - @user.transfers.each do |tr|
+            %tr.error
+              %td= tr.destination.label_method
+              %td.amount= tr.amount
+              %td
+                = time_ago_in_words(tr.created_at)
+                ago
+
+
+      %div.span5
+        %h3  Credit
+        %table.table.table-striped.table-bordered.table-hover.table-condensed
+          %tr
+            %th{width: '40%'} from
+            %th{width: '20%'} amount
+            %th{width: '40%'} to
+          - @user.transfers_credit.each do |tr|
+            %tr.success
+              %td= tr.origin     .label_method
+              %td.amount= tr.amount
+              %td
+                = time_ago_in_words(tr.created_at)
+                ago
+
+

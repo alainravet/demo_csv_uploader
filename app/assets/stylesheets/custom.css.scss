@@ -6,3 +6,15 @@ ul.nav {
 
   }
 }
+
+.transfers_history {
+  h2, h3 {
+    text-align: center;
+  }
+  th {
+    text-align: center;
+  }
+  td.amount {
+    text-align: right;
+  }
+}

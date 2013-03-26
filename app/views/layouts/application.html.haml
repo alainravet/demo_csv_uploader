@@ -48,26 +48,17 @@
                 = link_to users_path, class: '' do
                   %i.icon-user
                   Manager Users
-              %li= link_to "Link2", "/path2"
-              %li= link_to "Link3", "/path3"
+              %li
+                - if current_user
+                  = link_to 'Your Account', current_user
+                - else
+                  = link_to 'Your Account', log_in_path
           / /.nav-collapse
     .container-fluid
       .row-fluid
-        -#.span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Manage Users", users_path
-              %li= link_to "Link2", "/path2"
-              %li= link_to "Link3", "/path3"
-          / /.well
-        / /span
         .span12
           = bootstrap_flash
           = yield
-      / /row
-      %footer
-        %p &copy; alainravet@gmail.com 2013
     / /container
     /
       Javascripts

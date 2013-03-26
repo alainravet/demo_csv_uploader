@@ -23,6 +23,7 @@ gem 'twitter-bootstrap-rails'
 
 gem 'haml-rails',     github: 'indirect/haml-rails'
 gem 'simple_form'
+gem 'redcarpet'
 
 gem 'jquery-rails'
 

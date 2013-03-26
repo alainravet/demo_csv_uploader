@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
 
   has_one :account
+  has_many :transfers, :class_name => "Transfer", :foreign_key => "origin_id"
+  has_many :transfers_credit, :class_name => "Transfer", :foreign_key => "destination_id"
 
   has_secure_password
 
@@ -19,9 +21,5 @@ class User < ActiveRecord::Base
 
   def admin?
     login == 'admin'
-  end
-
-  def transfer_money_to(dest_user, amount)
-    Transfer.perform(self.account, dest_user.account, amount)
   end
 end

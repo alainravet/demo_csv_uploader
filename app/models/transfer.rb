@@ -1,14 +1,20 @@
 class Transfer < ActiveRecord::Base
-  class Error < RuntimeError; end
-  class InvalidAmountError        < Transfer::Error; end
-  class InvalidDestinationError   < Transfer::Error; end
 
-  belongs_to :origin
-  belongs_to :destination
-  attr_accessible :origin_id, :destination_id, :amount, :amount_in_cents
+  belongs_to :origin,      :class_name => "Account", :foreign_key => "origin_id"
+  belongs_to :destination, :class_name => "Account", :foreign_key => "destination_id"
+
+  attr_accessible :origin_id, :origin, :destination_id, :destination, :amount, :amount_in_cents,
+                  :origin_attributes, :destination_attributes
+
+  validates_presence_of :origin_id, :destination_id, :amount_in_cents, :amount
+
+  before_save   :patch_ensure_amounts_in_cent_is_number
+  def patch_ensure_amounts_in_cent_is_number
+    self.amount_in_cents= amount_in_cents.to_f
+  end
 
   def amount
-    amount_in_cents / 100.00
+    amount_in_cents.to_i / 100.00
   end
 
   def amount=(value)
@@ -16,24 +22,39 @@ class Transfer < ActiveRecord::Base
   end
 
   def self.perform(source_account, dest_account, amount)
-    validate_transfer_parameters!(source_account, dest_account, amount)
-    change_balance(source_account, -amount)
-    change_balance(dest_account,    amount)
-    create!(origin_id: source_account.id, destination_id: dest_account.id, amount: amount)
+    tr = Transfer.new(origin: source_account, destination: dest_account, amount: amount)
+    tr.save!
+    tr
+  end
+
+  validate :amount_is_valid
+  validate :destination_is_valid
+
+    def amount_is_valid
+      errors.add(:amount, "#{amount} is too much. Your balance is #{origin.balance}") if origin && amount > origin.balance
+    end
+    def destination_is_valid
+      unless origin && destination && origin != destination
+        errors.add(:destination, "you cannot transfer money to yourself")
+      end
+    end
+
+
+  before_create :update_balances
+
+  def  update_balances
+    change_balance(origin,      -amount)
+    change_balance(destination, amount)
   end
 
 private
 
-  def self.validate_transfer_parameters!(source_account, dest_account, amount)
-    if (source_account == dest_account) || (!source_account.is_a?(Account)) || (!dest_account.is_a?(Account))
-      raise InvalidDestinationError
-    end
-    if amount < 0 || amount > source_account.balance
-      raise InvalidAmountError
-    end
+  def self.change_balance(source_account, amount)
+    source_account.balance = source_account.balance + amount
+    source_account.save!
   end
 
-  def self.change_balance(source_account, amount)
+  def change_balance(source_account, amount)
     source_account.balance = source_account.balance + amount
     source_account.save!
   end

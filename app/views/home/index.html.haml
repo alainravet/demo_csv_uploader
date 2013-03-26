@@ -1,8 +1,34 @@
 %h1 Home#index
 
+%pre
+  <h4>Example of scenario</h4>
+  \- reset the DB (the red button below)
+  \- login as Administrator (login = admin/pwd = admin)
+  As #admin#,
+  \- #{link_to 'create a new user', new_user_path}&nbsp;
+  in [Manage Users] <small>(ex: login = yourname/pwd = yourpwd)</small>
+  \- transfer $1000 to the 2 other users, in [Your account]
+  &nbsp;&nbsp; => observe that
+  &nbsp;&nbsp; &nbsp;&nbsp; 1° your balance has been updated
+  &nbsp;&nbsp; &nbsp;&nbsp; 2° 2 transfers appear in the transfer:debit history
+  &nbsp;
+  \- #{link_to 'logout', log_out_path}&nbsp; and
+  \- #{link_to 'login', log_in_path}&nbsp; as another user
+  \- transfer $100 to the 2 other users, in [Your account]
+  &nbsp;&nbsp; => observe that
+  &nbsp;&nbsp; &nbsp;&nbsp; 1° your balance has been updated
+  &nbsp;&nbsp; &nbsp;&nbsp; 2° transfers appear  now in the 2 columgs : debit and credit
+  &nbsp;
+
+
+
 .alert.alert-info
-  %i.icon-cogs
   =link_to reset_sample_data_users_path, class: 'btn btn-danger', method: :post do
     %i.icon-refresh
-    Reload DB with 2 default users : 'admin/admin' and 'test/test'
+    Reset the DB and populated it with 2 users
+    %br
+    %br
+    admin/admin
+    %br
+    test/test
 
