@@ -38,7 +38,8 @@
             %p.navbar-text.pull-right
               - if current_user
                 Logged in as
-                = current_user.name
+                = link_to current_user.name, current_user
+                &nbsp;|&nbsp;
                 = link_to "Logout", log_out_path
               - else
                 = link_to "Login", log_in_path
@@ -47,12 +48,21 @@
               %li
                 = link_to users_path, class: '' do
                   %i.icon-user
-                  Manager Users
+                  All Users
               %li
                 - if current_user
                   = link_to 'Your Account', current_user
                 - else
                   = link_to 'Your Account', log_in_path
+              %li
+
+              %li
+                - if current_user
+                  = link_to new_user_transfer_path(current_user), :class => '' do
+                    %i.icon-money
+                    Transfer money
+                - else
+                  = link_to 'Transfer money', log_in_path
           / /.nav-collapse
     .container-fluid
       .row-fluid

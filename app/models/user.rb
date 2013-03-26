@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   after_create  :create_linked_account
 
-  delegate :balance, to: :account
+  delegate :balance, :balance_in_cents, to: :account
 
   def create_linked_account
     self.build_account(balance: 0).save!

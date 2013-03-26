@@ -4,7 +4,12 @@ class TransfersController < ApplicationController
   before_filter :authorize, only: [:new, :create, :index]
 
   def new
-    @transfer = Transfer.new(origin_id: current_user.id)
+    if current_user.balance_in_cents == 0
+      redirect_to current_user, alert: "Your balance is 0; you cannot transfer any money"
+    else
+      @transfer = Transfer.new(origin_id: current_user.id)
+    end
+
   end
 
   def create

@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
 
   before_filter :authorize_owner_or_admin_only, only: [:show, :edit, :update, :destroy]
-  before_filter :authorize_admin_only, only: [:index]
 
   # GET /users
   # GET /users.json
