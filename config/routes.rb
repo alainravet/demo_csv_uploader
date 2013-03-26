@@ -9,8 +9,10 @@ SimpleBanking::Application.routes.draw do
   get 'sign_up' => 'users#new',         :as => 'sign_up'
   resources :sessions
 
+  root :to => 'home#demo'
   root :to => 'home#index'
-
+  get 'home/demo'
+  get 'home/index', as: 'home_index'
   resources :users do
     collection do
       post 'reset_sample_data'

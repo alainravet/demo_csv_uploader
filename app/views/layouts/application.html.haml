@@ -33,7 +33,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => root_path} SimpleBanking
+          %a.brand{:href => home_index_path} SimpleBanking
           .container-fluid.nav-collapse
             %p.navbar-text.pull-right
               - if current_user
@@ -63,7 +63,15 @@
                     Transfer money
                 - else
                   = link_to 'Transfer money', log_in_path
-          / /.nav-collapse
+
+              - if controller.action_name == 'demo'
+                %li
+                  .container
+                    = link_to "Start", home_index_path, class: 'btn-start btn btn-primary'
+              - unless controller.action_name == 'demo'
+                %li
+                  .container
+                    = link_to "DEMO", home_demo_path, class: 'btn-demo btn btn-warning'
     .container-fluid
       .row-fluid
         .span12
