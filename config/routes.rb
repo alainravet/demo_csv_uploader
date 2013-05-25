@@ -16,7 +16,7 @@ CsvUploader::Application.routes.draw do
   get 'sign_up' => 'users#new',         :as => 'sign_up'
   resources :sessions
 
-  root :to => 'home#index'
+  root :to => 'csv_files#index'
   get 'home/demo'
   get 'home/index', as: 'home_index'
   resources :users do
