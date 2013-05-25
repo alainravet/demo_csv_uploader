@@ -1,2 +1,6 @@
 %h1 LoggedTime#index
-%p Find me in app/views/logged_time/index.html.haml
+
+
+%ul
+  - @logged_times.each do |lt|
+    %li= lt.to_s

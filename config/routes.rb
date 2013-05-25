@@ -1,6 +1,6 @@
 CsvUploader::Application.routes.draw do
 
-  get "logged_time/index"
+  get 'logged_time' => 'logged_time#index'
 
   get "transfers/new"
 
