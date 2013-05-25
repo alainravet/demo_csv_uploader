@@ -1,8 +1,19 @@
-%pre
+%h2 Upload Files :
+
+%ul
+  - if @uploaded_files.present?
+    - @uploaded_files.each do |f|
+      %li= f.inspect
+
+  - else
+    NO FILES YET
+
+
+-#%pre
   %h4 Actions :
   \- reset the DB (the red button below)
 
-.alert.alert-info
+-#.alert.alert-info
   =link_to reset_sample_data_users_path, class: 'btn btn-danger', method: :post do
     %i.icon-refresh
     Reset the DB and populate it with 2 users :
