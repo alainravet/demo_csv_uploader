@@ -1,4 +1,4 @@
-SimpleBanking::Application.routes.draw do
+CsvUploader::Application.routes.draw do
 
   get "transfers/new"
 

@@ -86,7 +86,7 @@ class UsersController < ApplicationController
   def reset_sample_data
     require 'rake'
     Rake::Task.clear                  # necessary to avoid tasks being loaded several times in dev mode
-    SimpleBanking::Application.load_tasks
+    CsvUploader::Application.load_tasks
     Rake::Task['db:seed'].reenable    # in case you're going to invoke the same task second time.
     Rake::Task['db:seed'].invoke
     redirect_to home_index_path, notice: "Sample Data was reset with #{User.count} users : #{User.all.collect(&:login).join(', ')}"

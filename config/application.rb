@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module SimpleBanking
+module CsvUploader
   class Application < Rails::Application
     config.force_ssl = (ENV["ENABLE_HTTPS"] == "yes")
     config.ssl_options = {hsts: {expires: 3600}}

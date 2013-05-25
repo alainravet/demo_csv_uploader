@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-SimpleBanking::Application.load_tasks
+CsvUploader::Application.load_tasks

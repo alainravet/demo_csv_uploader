@@ -17,7 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: simple_banking_development
+  database: csv_uploader_development
   pool: 5
   username: postgres
   password: postgres
@@ -46,7 +46,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: simple_banking_test
+  database: csv_uploader_test
   pool: 5
   username: postgres
   password: postgres
@@ -54,7 +54,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: simple_banking_development
+  database: csv_uploader_development
   pool: 5
   username: postgres
   password: postgres
