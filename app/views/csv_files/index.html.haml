@@ -1,0 +1,19 @@
+%h1 Listing csv_files
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @csv_files.each do |csv_file|
+    %tr
+      %td= csv_file.name
+      %td= link_to 'Show', csv_file
+      %td= link_to 'Edit', edit_csv_file_path(csv_file)
+      %td= link_to 'Destroy', csv_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Csv file', new_csv_file_path
