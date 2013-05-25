@@ -1,19 +1,19 @@
-%h1 Listing csv_files
+= link_to new_csv_file_path, class: 'btn btn-primary btn-large active' do
+  %i.icon-white.icon-circle-arrow-up
+  Upload a new CSVfile
 
-%table
-  %tr
-    %th Name
-    %th Download
-    %th
-    %th
+%h1 Uploaded Files
 
+%table.table.table-striped.table-bordered.table-hover.table-condensed
   - @csv_files.each do |csv_file|
     %tr
-      %td=link_to csv_file.name, csv_file
-      %td= link_to "Download", file_csv_file_path(csv_file), class: 'btn btn-mini'
-      %td= link_to 'Edit', edit_csv_file_path(csv_file)
+      %td
+        = link_to "Download", file_csv_file_path(csv_file), class: 'btn btn-mini btn-success active'
+        = csv_file.file.file.size
+        bytes
+      %td
+        =link_to csv_file.name, csv_file
       %td= link_to 'Destroy', csv_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Csv file', new_csv_file_path

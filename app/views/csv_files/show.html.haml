@@ -1,12 +1,17 @@
+= link_to 'Back', csv_files_path
+
 %p#notice= notice
 %p
   %b
     ID:
   = @csv_file.id
 %p
-  %b File
-  = link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini'
+  = link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success'
 
-= link_to 'Edit', edit_csv_file_path(@csv_file)
-\|
-= link_to 'Back', csv_files_path
+%p
+  Contents :
+  .well
+    = simple_format(@csv_file.file.read)
+
+
+
