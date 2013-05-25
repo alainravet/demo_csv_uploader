@@ -1,12 +1,11 @@
 %p#notice= notice
-
 %p
-  %b Name:
-  = @csv_file.name
-
+  %b
+    ID:
+  = @csv_file.id
 %p
   %b File
-  = @csv_file.file
+  = link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini'
 
 = link_to 'Edit', edit_csv_file_path(@csv_file)
 \|

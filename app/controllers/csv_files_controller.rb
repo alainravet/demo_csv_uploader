@@ -21,6 +21,15 @@ class CsvFilesController < ApplicationController
     end
   end
 
+  # source: https://github.com/carrierwaveuploader/carrierwave-mongoid#using-mongodbs-gridfs-store
+  def file
+    @csv_file = CsvFile.find(params[:id])
+    content = @csv_file.file.read
+    #if stale?(etag: content, last_modified: @csv_file.updated_at.utc, public: true)
+      send_data content, type: @csv_file.file.file.content_type, filename: @csv_file.name
+      #expires_in 0, public: true
+    #end
+  end
   # GET /csv_files/new
   # GET /csv_files/new.json
   def new
@@ -41,6 +50,7 @@ class CsvFilesController < ApplicationController
   # POST /csv_files.json
   def create
     @csv_file = CsvFile.new(params[:csv_file])
+    @csv_file.name = params[:csv_file][:file].original_filename rescue nil
 
     respond_to do |format|
       if @csv_file.save
