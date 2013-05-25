@@ -1,8 +1,9 @@
-= simple_form_for(@csv_file) do |f|
+= simple_form_for(@csv_file, :html => {:multipart => true} ) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
+    = f.file_field :file
 
   .form-actions
     = f.button :submit
