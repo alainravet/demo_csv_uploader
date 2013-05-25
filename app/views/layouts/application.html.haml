@@ -35,7 +35,7 @@
             %span.icon-bar
           %a.brand{:href => home_index_path} CsvUploader
           .container-fluid.nav-collapse
-            %p.navbar-text.pull-right
+            -#%p.navbar-text.pull-right
               - if current_user
                 Logged in as
                 = link_to current_user.name, current_user
@@ -44,12 +44,12 @@
               - else
                 = link_to "Login", log_in_path
 
-            %ul.nav
+            -#%ul.nav
               %li
                 = link_to users_path, class: '' do
                   %i.icon-user
                   All Users
-              %li
+              -#%li
                 - if current_user
                   = link_to 'Your Account', current_user
                 - else
