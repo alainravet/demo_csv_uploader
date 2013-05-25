@@ -1,5 +1,6 @@
 class LoggedTimeController < ApplicationController
   def index
-    @logged_times = [Time.now]
+    LoggedTime.create value: Time.now
+    @logged_times = LoggedTime.descending(:value).all
   end
 end
