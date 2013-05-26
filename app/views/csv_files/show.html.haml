@@ -1,41 +1,7 @@
+= link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success pull-right'
+%h3 original CSV file contents :
+
 .well.well-large
-  %p
-    = link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success'
-
-  %h3 Export Category
-  .well.well-small
-    = form_tag export_csv_file_path(@csv_file) do
-      = submit_tag 'Filter, Reorder, and Export', class: 'btn btn-primary'
-      %table.table.table-stripe.table-condensed.table-hover
-        %tr
-          %th Target Columns
-          %th Source Columns
-        - @target_headers.each_with_index do |h, idx|
-          %tr
-            %td
-              %strong= h
-            %td
-              = select_tag "[target][#{idx}]", options_for_select(@source_headers.each_with_index.map { |h,i| [h, i] }), include_blank: true
-
-  - if @csv_data_for_export
-    %h3 Data prepared for export :
-    = link_to "Download '#{@modified_filename}'", modified_file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success'
-
-    %table.table.table-striped.table-condensed.table-hover
-      - @csv_data_for_export.each_with_index do |row, idx|
-        %tr
-          - row.each do |cell|
-            - if idx == 0
-              %th= cell
-            - else
-              %td= cell
-
-
-  %h3 CSV file contents :
-
-  = @headers.join(', ')
-
-
   %table.table.table-striped.table-condensed.table-hover
     - @csv_data.each_with_index do |row, idx|
       %tr
@@ -44,4 +10,45 @@
             %th= cell
           - else
             %td= cell
+
+    %tr
+      - @source_headers.each do |_|
+        %td ...
+
+- if @csv_data_for_export
+  = link_to "Download '#{@modified_filename}'", modified_file_csv_file_path(@csv_file), class: 'btn btn-success pull-right'
+
+%h3 Generate a new CSV file :
+.well.well-large
+  %h5 step 1 : filter + reorder columns
+  = form_tag export_csv_file_path(@csv_file) do
+    %table.table.table-stripe.table-condensed.table-hover
+      %tr
+        %th Target Columns
+        %th Source Columns
+      - @target_headers.each_with_index do |h, idx|
+        %tr
+          %td
+            %strong= h
+          %td
+            = select_tag "[target][#{idx}]", options_for_select(@source_headers.each_with_index.map { |h,i| [h, i] }), include_blank: true
+  %h5{style: "display:inline"} step 2 :
+  = submit_tag 'Generate the new CSV data/file', class: 'btn btn-primary'
+
+%h3 Data prepared for export :
+- if @csv_data_for_export
+  = link_to "Download '#{@modified_filename}'", modified_file_csv_file_path(@csv_file), class: 'btn btn-success'
+
+.well.well-large
+  %table.table.table-striped.table-condensed.table-hover
+    - @csv_data_for_export.take(5).each_with_index do |row, idx|
+      %tr
+        - row.each do |cell|
+          - if idx == 0
+            %th= cell
+          - else
+            %td= cell
+    %tr
+      - @target_headers.each do |_|
+        %td ...
 
