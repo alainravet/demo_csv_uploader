@@ -1,31 +1,40 @@
-= link_to '/small.csv.zip', class: 'btn btn-danger btn-'do
-  %i.icon-white.icon-download(style='font-size:1.2em')
-  Download a test csv file : 'small.csv'
-%br
-%br
+- if @csv_files.present?
+  = link_to '/small.csv.zip', class: 'btn btn-danger btn-'do
+    %i.icon-white.icon-download(style='font-size:1.2em')
+    Download a test csv file : 'small.csv'
+  %br
+  %br
 
 = link_to new_csv_file_path, class: 'btn btn-primary btn-large active btn-block' do
   %i.icon-white.icon-circle-arrow-up
   Upload a *.csv file
 
-%h1 Uploaded CSV files
+- if @csv_files.empty?
+  %h2 No uploaded CSV files yet.
+  You can use this sample file to test the application :
+  = link_to '/small.csv.zip', class: 'btn btn-danger btn-'do
+    %i.icon-white.icon-download(style='font-size:1.2em')
+    Download a test csv file : 'small.csv'
 
-%table.table.table-striped.table-bordered.table-hover.table-condensed
-  %tr
-    %th(colspan="2" style="text-align:center") Original
-    %th(colspan="1" style="text-align:center") Altered
-    %th
+- else
+  %h1 Uploaded CSV files
 
-  - @csv_files.each do |csv_file|
+  %table.table.table-striped.table-bordered.table-hover.table-condensed
     %tr
-      %td
-        =link_to csv_file.name, csv_file, class:'filename'
-      %td
-        = link_to "Download", file_csv_file_path(csv_file), class: 'btn btn-mini btn-success active'
-        = "#{csv_file.file.file.size} bytes" rescue "ERROR"
-      %td
-        - if csv_file.data_for_export
-          = link_to "Download #{modified_filename(csv_file)}", file_csv_file_path(csv_file), class: 'btn btn-mini btn-warning active'
-      %td= link_to 'destroy', csv_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th(colspan="2" style="text-align:center") Original
+      %th(colspan="1" style="text-align:center") Altered
+      %th
+
+    - @csv_files.each do |csv_file|
+      %tr
+        %td
+          =link_to csv_file.name, csv_file, class:'filename'
+        %td
+          = link_to "Download", file_csv_file_path(csv_file), class: 'btn btn-mini btn-success active'
+          = "#{csv_file.file.file.size} bytes" rescue "ERROR"
+        %td
+          - if csv_file.data_for_export
+            = link_to "Download #{modified_filename(csv_file)}", file_csv_file_path(csv_file), class: 'btn btn-mini btn-warning active'
+        %td= link_to 'destroy', csv_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 
