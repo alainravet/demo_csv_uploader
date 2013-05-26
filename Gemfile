@@ -42,6 +42,7 @@ gem 'better_errors'
 gem 'mongoid'
 
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'newrelic_rpm'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

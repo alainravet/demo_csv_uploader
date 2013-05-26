@@ -101,6 +101,7 @@ GEM
       mongoid (~> 3.0)
     moped (1.5.0)
     multi_json (1.7.2)
+    newrelic_rpm (3.6.2.96)
     origin (1.1.0)
     pg (0.14.1)
     polyglot (0.3.3)
@@ -177,6 +178,7 @@ DEPENDENCIES
   less-rails
   minitest-reporters
   mongoid
+  newrelic_rpm
   pg
   rails (= 3.2.13)
   redcarpet
