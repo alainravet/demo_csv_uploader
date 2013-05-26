@@ -1,17 +1,19 @@
-= link_to 'Back', csv_files_path
+.well.well-large
+  %p#notice= notice
+  %p
+    = link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success'
 
-%p#notice= notice
-%p
-  %b
-    ID:
-  = @csv_file.id
-%p
-  = link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success'
-
-%p
-  Contents :
-  .well
-    = simple_format(@csv_file.file.read)
+  %h4 Headers :
+  = @headers.join(', ')
 
 
+  %h4 File contents :
+  %table.table.table-striped.table-condensed.table-hover
+    - @csv_data.each_with_index do |row, idx|
+      %tr
+        - row.each do |cell|
+          - if idx == 0
+            %th= cell
+          - else
+            %td= cell
 

@@ -1,3 +1,5 @@
+require 'csv'
+
 class CsvFilesController < ApplicationController
   # GET /csv_files
   # GET /csv_files.json
@@ -14,6 +16,13 @@ class CsvFilesController < ApplicationController
   # GET /csv_files/1.json
   def show
     @csv_file = CsvFile.find(params[:id])
+
+    @csv_contents_as_string = @csv_file.file.read
+    csv_data = CSV.parse(@csv_contents_as_string)
+    @headers = csv_data.first
+    #csv_data.shift
+    @csv_data = csv_data
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -49,6 +58,7 @@ class CsvFilesController < ApplicationController
   # POST /csv_files
   # POST /csv_files.json
   def create
+    imported_file = params[:csv_file][:file]
     @csv_file = CsvFile.new(params[:csv_file])
     @csv_file.name = params[:csv_file][:file].original_filename rescue nil
 
