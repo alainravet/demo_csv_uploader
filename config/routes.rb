@@ -2,6 +2,7 @@ CsvUploader::Application.routes.draw do
 
   resources :csv_files do
     get :file, on: :member
+    get :modified_file, on: :member
     post :export, on: :member
   end
 

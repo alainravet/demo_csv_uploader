@@ -40,6 +40,7 @@ class CsvFilesController < ApplicationController
       csv_data_for_export   = CSV.parse(@csv_file.data_for_export)
       @headers_for_export   = csv_data_for_export.first
       @csv_data_for_export  = csv_data_for_export
+      @modified_filename = modified_filename(@csv_file)
     end
 
     @target_headers = TARGET_HEADERS
@@ -50,12 +51,26 @@ class CsvFilesController < ApplicationController
     end
   end
 
+  def modified_filename(csv_file)
+    suffix            = File.extname(csv_file.name)
+    base              = File.basename(csv_file.name, suffix)
+    "#{base}-modified#{suffix}"
+  end
+
   # source: https://github.com/carrierwaveuploader/carrierwave-mongoid#using-mongodbs-gridfs-store
   def file
     @csv_file = CsvFile.find(params[:id])
     content = @csv_file.file.read
     #if stale?(etag: content, last_modified: @csv_file.updated_at.utc, public: true)
       send_data content, type: @csv_file.file.file.content_type, filename: @csv_file.name
+      #expires_in 0, public: true
+    #end
+  end
+  def modified_file
+    @csv_file = CsvFile.find(params[:id])
+    content = @csv_file.data_for_export
+    #if stale?(etag: content, last_modified: @csv_file.updated_at.utc, public: true)
+      send_data content, type: @csv_file.file.file.content_type, filename: modified_filename(@csv_file)
       #expires_in 0, public: true
     #end
   end

@@ -19,6 +19,8 @@
 
   - if @csv_data_for_export
     %h3 Data prepared for export :
+    = link_to "Download '#{@modified_filename}'", modified_file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success'
+
     %table.table.table-striped.table-condensed.table-hover
       - @csv_data_for_export.each_with_index do |row, idx|
         %tr
