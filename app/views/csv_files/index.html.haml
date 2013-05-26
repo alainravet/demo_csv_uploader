@@ -9,8 +9,7 @@
     %tr
       %td
         = link_to "Download", file_csv_file_path(csv_file), class: 'btn btn-mini btn-success active'
-        = csv_file.file.file.size
-        bytes
+        = "#{csv_file.file.file.size} bytes" rescue "ERROR"
       %td
         =link_to csv_file.name, csv_file
       %td= link_to 'Destroy', csv_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
