@@ -35,6 +35,10 @@
             %span.icon-bar
           %a.brand{:href => root_path} CsvUploader
           .container-fluid.nav-collapse
+            %p.navbar-text.pull-right
+              - unless controller.action_name == 'demo'
+                = link_to "DEMO (video)", demo_path, class: 'btn-demo btn btn-mini btn-warning pull-right'
+
             -#%p.navbar-text.pull-right
               - if current_user
                 Logged in as
@@ -44,6 +48,10 @@
               - else
                 = link_to "Login", log_in_path
 
+            -#%ul.nav
+              - unless controller.action_name == 'demo'
+                %li
+                  .container= link_to "DEMO (video)", demo_path, class: 'btn-demo btn btn-mini btn-warning pull-right'
             -#%ul.nav
               %li
                 = link_to users_path, class: '' do
