@@ -1,6 +1,18 @@
 require 'csv'
+require 'csv_exporter'
 
 class CsvFilesController < ApplicationController
+
+  def export
+    @csv_file = CsvFile.find(params[:id])
+    header_map = params[:target].keep_if{|k,v| v.present?}
+    header_map = Hash[header_map.map{ |k, v| [k.to_i, v.to_i] }]
+    string = CsvExporter.export_as_string(@csv_file.file, header_map, TARGET_HEADERS)
+
+    @csv_file.data_for_export = string
+    @csv_file.save!
+    redirect_to @csv_file, notice: "successful conversion: Data is ready for export"
+  end
   # GET /csv_files
   # GET /csv_files.json
   def index
@@ -14,6 +26,7 @@ class CsvFilesController < ApplicationController
 
   # GET /csv_files/1
   # GET /csv_files/1.json
+  TARGET_HEADERS = ["First Name", "Last Name", 'Age']
   def show
     @csv_file = CsvFile.find(params[:id])
 
@@ -23,7 +36,14 @@ class CsvFilesController < ApplicationController
     #csv_data.shift
     @csv_data = csv_data
 
+    if @csv_file.data_for_export
+      csv_data_for_export   = CSV.parse(@csv_file.data_for_export)
+      @headers_for_export   = csv_data_for_export.first
+      @csv_data_for_export  = csv_data_for_export
+    end
 
+    @target_headers = TARGET_HEADERS
+    @source_headers = @headers
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @csv_file }

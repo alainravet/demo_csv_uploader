@@ -1,13 +1,39 @@
 .well.well-large
-  %p#notice= notice
   %p
     = link_to "Download '#{@csv_file.name}'", file_csv_file_path(@csv_file), class: 'btn btn-mini btn-success'
 
-  %h4 Headers :
+  %h3 Export Category
+  .well.well-small
+    = form_tag export_csv_file_path(@csv_file) do
+      = submit_tag 'Filter, Reorder, and Export', class: 'btn btn-primary'
+      %table.table.table-stripe.table-condensed.table-hover
+        %tr
+          %th Target Columns
+          %th Source Columns
+        - @target_headers.each_with_index do |h, idx|
+          %tr
+            %td
+              %strong= h
+            %td
+              = select_tag "[target][#{idx}]", options_for_select(@source_headers.each_with_index.map { |h,i| [h, i] }), include_blank: true
+
+  - if @csv_data_for_export
+    %h3 Data prepared for export :
+    %table.table.table-striped.table-condensed.table-hover
+      - @csv_data_for_export.each_with_index do |row, idx|
+        %tr
+          - row.each do |cell|
+            - if idx == 0
+              %th= cell
+            - else
+              %td= cell
+
+
+  %h3 CSV file contents :
+
   = @headers.join(', ')
 
 
-  %h4 File contents :
   %table.table.table-striped.table-condensed.table-hover
     - @csv_data.each_with_index do |row, idx|
       %tr
