@@ -11,7 +11,7 @@ class CsvFilesController < ApplicationController
 
     @csv_file.data_for_export = string
     @csv_file.save!
-    redirect_to @csv_file, notice: "successful conversion: Data is ready for export"
+    redirect_to csv_file_path(@csv_file, anchor: 'export_contents'), notice: "successful conversion: Data is ready for export"
   end
   # GET /csv_files
   # GET /csv_files.json
@@ -56,6 +56,7 @@ class CsvFilesController < ApplicationController
     base              = File.basename(csv_file.name, suffix)
     "#{base}-modified#{suffix}"
   end
+  helper_method :modified_filename
 
   # source: https://github.com/carrierwaveuploader/carrierwave-mongoid#using-mongodbs-gridfs-store
   def file

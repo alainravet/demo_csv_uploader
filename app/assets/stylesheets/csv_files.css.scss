@@ -1,3 +1,23 @@
 // Place all the styles related to the CsvFiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h3 {
+  span.filename {
+    color: #aaaaaa;
+    style:italic;
+    font-family: courier;
+    font-weight: normal;
+    font-size: 1em;
+  }
+}
+
+td {
+  a.filename {
+    color: blue;
+    style:italic;
+    font-family: courier;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+}

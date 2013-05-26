@@ -1,18 +1,25 @@
-= link_to new_csv_file_path, class: 'btn btn-primary btn-large active' do
+= link_to new_csv_file_path, class: 'btn btn-primary btn-large active btn-block' do
   %i.icon-white.icon-circle-arrow-up
-  Upload a new CSVfile
+  Upload a *.csv file
 
-%h1 Uploaded Files
+%h1 Uploaded CSV files
 
 %table.table.table-striped.table-bordered.table-hover.table-condensed
+  %tr
+    %th(colspan="2" style="text-align:center") Original
+    %th(colspan="1" style="text-align:center") Altered
+    %th
+
   - @csv_files.each do |csv_file|
     %tr
+      %td
+        =link_to csv_file.name, csv_file, class:'filename'
       %td
         = link_to "Download", file_csv_file_path(csv_file), class: 'btn btn-mini btn-success active'
         = "#{csv_file.file.file.size} bytes" rescue "ERROR"
       %td
-        =link_to csv_file.name, csv_file
-      %td= link_to 'Destroy', csv_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - if csv_file.data_for_export
+          = link_to "Download #{modified_filename(csv_file)}", file_csv_file_path(csv_file), class: 'btn btn-mini btn-warning active'
+      %td= link_to 'destroy', csv_file, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
 
