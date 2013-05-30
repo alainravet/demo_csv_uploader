@@ -1,5 +1,11 @@
 CsvUploader::Application.routes.draw do
 
+  get "audio_record/example1"
+
+  get "audio_record/example2"
+
+  get "audio_record/index"
+
   resources :csv_files do
     get :file, on: :member
     get :modified_file, on: :member
