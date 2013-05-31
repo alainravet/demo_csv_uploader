@@ -1,5 +1,6 @@
 class AudioRecordController < ApplicationController
   def index
+    @audios = Audio.all
   end
 
   def example1

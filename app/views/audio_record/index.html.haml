@@ -1,2 +1,4 @@
-%h1 AudioRecord#index
-%p Find me in app/views/audio_record/index.html.haml
+%h1 uploaded Audio records (#{@audios.size})
+
+- @audios.each do |audio|
+  = debug audio
