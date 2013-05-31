@@ -1,4 +1,27 @@
+#locationforrecorder.well.well-small
+  .buttons
+    = button_tag nil, id: 'record', class: 'btn btn-large btn-primary' do
+      Start Recording
+    = button_tag nil, id: 'stop', class: 'btn btn-large' do
+      Stop
+    = button_tag nil, id: 'send', class: 'btn btn-large btn-success' do
+      Save Recording
+
 %h1 uploaded Audio records (#{@audios.size})
 
-- @audios.each do |audio|
-  = debug audio
+%table.table.table-striped.table-bordered.table-hover.table-condensed
+  %tr
+    %th Size
+    %th
+    %th
+  - @audios.each do |audio|
+    - next unless audio_tag audio.file.file
+    - next if (size = audio.file.size rescue 0) == 0
+
+    %tr
+      %td
+        = "#{size} bytes"
+      %td
+        = audio_tag(file_audio_record_path(audio), :autoplay => false, :controls => true) #
+
+      %td= link_to 'destroy', audio, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-danger"
