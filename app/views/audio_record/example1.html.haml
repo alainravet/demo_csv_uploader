@@ -1,2 +1,56 @@
-%h1 AudioRecord#example1
-%p Find me in app/views/audio_record/example1.html.haml
+%body
+  %h3 jRecorder Example 1 - Insert flash recorder inside the body tag
+  %div{:style => "background-color: #eeeeee;border:1px solid #cccccc"}
+    Time:
+    %span#time 00:00
+  %div
+    Level:
+    %span#level
+  #levelbase{:style => "width:200px;height:20px;background-color:#ffff00"}
+    #levelbar{:style => "height:19px; width:2px;background-color:red"}
+  %div
+    Status:
+    %span#status
+  %div
+    %input#record{:style => "color:red", :type => "button", :value => "Record"}/
+    %p
+      This Record button trigger the record event. See the javascript example in the bottom of the page. (View Source in your browser).
+    %pre
+      :preserve
+
+        $('#record').click(function(){
+            $.jRecorder.record(30); //record up to 30 sec and stops automatically
+           })
+    %hr/
+    %input#stop{:type => "button", :value => "Stop"}/
+    %p
+      This Stop button trigger the stop record event.
+    %pre
+      :preserve
+
+          Onclick of this button trigger  $.jRecorder.sendData() which send the data to the Server
+                %hr/
+    %input#send{:type => "button", :value => "Send Data"}/
+    %p
+      This SendData button trigger the sendData event to flash to send the wav data to Server (configured in the host parameter).
+    %hr/
+    %pre
+      :preserve
+
+        $('#stop').click(function(){
+            $.jRecorder.stop();
+        })
+    %hr/
+  %p
+    Time area is used to update the time. There is an event Listener which update the recording time dynamically.
+  %pre
+    :preserve
+
+          callback_activityTime:     function(time){callback_activityTime(time);  //see the initialisation
+          //function callback
+          function callback_activityTime(time)
+           {
+             $('#time').html(time);
+           }
+}
+

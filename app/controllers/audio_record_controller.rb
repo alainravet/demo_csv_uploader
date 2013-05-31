@@ -17,5 +17,6 @@ class AudioRecordController < ApplicationController
     File.open(upload_dir.join(filename), 'wb') do |file|
       file.puts(env['rack.input'].read)
     end
+    render :nothing => true
   end
 end
