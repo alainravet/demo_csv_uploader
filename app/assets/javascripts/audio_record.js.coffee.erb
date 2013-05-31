@@ -15,6 +15,7 @@ jQuery ->
     $("#status").html "Recording event is finished"
   callback_finished_sending = ->
     $("#status").html "File has been sent to server mentioned as host parameter"
+    window.location.href = '/audio_record/example1'
   callback_activityLevel = (level) ->
     $("#level").html level
     if level is -1
