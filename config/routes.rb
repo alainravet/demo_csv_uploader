@@ -1,9 +1,9 @@
 CsvUploader::Application.routes.draw do
 
+  post "audio_upload" => "audio_record#create"
+
   get "audio_record/example1"
-
   get "audio_record/example2"
-
   get "audio_record/index"
 
   resources :csv_files do
