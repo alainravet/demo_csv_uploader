@@ -1,0 +1,13 @@
+http://api.rubyonrails.org/classes/ActionDispatch/Request.html#method-i-raw_post
+
+PHP: file_get_contents(" php://input")
+Rails: request.env[' rack.input']
+
+$fp = fopen($upload_path."/".$filename.".wav", "wb");
+
+   fwrite($fp, file_get_contents('php://input'));
+
+   fclose($fp);
+
+   exit('done');
+

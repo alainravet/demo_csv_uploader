@@ -6,6 +6,18 @@
       Stop
     = button_tag nil, id: 'send', class: 'btn btn-large btn-success' do
       Save Recording
+  %div{:style => "background-color: #eeeeee;border:1px solid #cccccc"}
+    Time:
+    %span#time 00:00
+  %div
+    Level:
+    %span#level
+  #levelbase{:style => "width:200px;height:20px;background-color:#ffff00"}
+    #levelbar{:style => "height:19px; width:2px;background-color:red"}
+  %div
+    Status:
+    %span#status
+
 
 %h1 uploaded Audio records (#{@audios.size})
 
